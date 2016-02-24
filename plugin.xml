@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<plugin id="info.duanye.dusdk" version="0.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>BDLocation</name>
+  <description>A Cordova Plugin for using Baidu Locationg SDK in cordova.</description>
+  <author>Xiaohui Duan</author>
+  <keywords>location</keywords>
+  <js-module name="BDLoc" src="www/BDLoc.js">
+    <clobbers target="BDLoc" />
+  </js-module>
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="BDLocPlugin">
+        <param name="android-package" value="info.duanye.dusdk.BDLocPlugin" />
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/info/duanye/dusdk/BDLocPlugin.java" target-dir="src/info/duanye/dusdk/" />
+    <source-file src="src/android/info/duanye/dusdk/Commons.java" target-dir="src/info/duanye/dusdk/" />
+    <source-file src="src/android/info/duanye/dusdk/BDLocReceiver.java" target-dir="src/info/duanye/dusdk/" />
+
+    <!-- 放入libs文件夹中文件 -->
+    <source-file src="src/android/libs/arm64-v8a/liblocSDK5.so" target-dir="libs/arm64-v8a/"/>
+    <source-file src="src/android/libs/armeabi/liblocSDK5.so" target-dir="libs/armeabi/"/>
+    <source-file src="src/android/libs/armeabi-v7a/liblocSDK5.so" target-dir="libs/armeabi-v7a/"/>
+    <source-file src="src/android/libs/mips/liblocSDK5.so" target-dir="libs/mips/"/>
+    <source-file src="src/android/libs/mips64/liblocSDK5.so" target-dir="libs/mips64/"/>
+    <source-file src="src/android/libs/x86/liblocSDK5.so" target-dir="libs/x86/"/>
+    <source-file src="src/android/libs/x86_64/liblocSDK5.so" target-dir="libs/x86_64/"/>
+    <source-file src="src/android/libs/locSDK_5.01.jar" target-dir="libs/"/>
+    <source-file src="src/android/libs/gson-2.3.jar" target-dir="libs/"/>
+
+    <!-- 注册服务 -->
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <service android:enabled="true" android:name="com.baidu.location.f" android:process=":remote">
+        </service>
+    </config-file>
+
+    <!-- 百度地图appkey -->
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="uLOpUEzX3YXmWCgkB5LVHTuh" />
+    </config-file>
+
+    <!-- 权限申请 -->
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+        <uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+    </config-file>
+
+  </platform>
+</plugin>
